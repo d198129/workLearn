@@ -82,4 +82,44 @@ class Request2 {
     }
 }
 
+export {
+    Request2
+}
+
 // 3. 接口拦截器
+// 首先将AxiosRequestConfig类型修改为RequestConfig允许传递拦截器
+// 然后我们在类拦截器中将接口请求的数据进行了返回，也就是说request()方法中
+// 得到的类型就不是AxiosRequest
+// request<T =any, R = AxiosRequest<T>, D = any>(config: AxiosRequestConfig<D>): Promise<R>
+
+// 改变request()方法的返回值类型，我们的代码如下
+// request<T>(config: RequestConfig): Promise<T> {
+//     return new Promise((resolve, reject) => {
+//         if(config.interceptors?.requestInterceptors) {
+//             config = config.interceptors.requestInterceptors(config);
+//         }
+//         this.instance
+//         .request<any, T>(config)
+//         .then(res => {
+//             // 如果我们为单个相应设置拦截器，这里使用单个相应的拦截器
+//             if (config.interceptors?.responseInterceptors) {
+//                  res = config.interceptors.requestInterceptors(config)
+//             }
+//              resolve(res);
+//         })
+//         .catch((err: any) = {
+//               reject(err)
+//         })
+//     }
+// });
+
+// 存在一个细节， 我们在拦截器接受的类型一直是AxiosResponse类型，而在拦截器中将返回的类型改变
+// 所以说我们需要为拦截器传递一个泛型
+// export default RequestInterceptors {
+//     // 请求拦截
+//     requestInterceptors?: (config: AxiosRequestConfig) => AxiosRequestConfig
+//     requestInterceptorsCatch? (err: any) => any
+//     // 相应拦截
+//     responseInterceptors?: <T = AxiosResponse>(config: T) => T
+//     responseInterceptorsCatch?: (err: any) => any
+// }
