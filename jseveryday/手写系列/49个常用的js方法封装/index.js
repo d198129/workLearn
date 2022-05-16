@@ -52,44 +52,55 @@
 // console.log(uniq('aa111abcdddeff'));
 
 // 4. 深拷贝 不考虑函数
-function deepClone1(obj, result) {
-    let result = result || {};
-    for (let prop in obj) {
-        if (obj.hasOwnProperty(prop)) {
-            if (typeof obj[prop] == 'object' && obj[prop] !== null) {
-                // 是引用类型且不为null
-                if (Object.prototype.toString.call(obj[prop]) == '[object Object]') {
-                    // 对象
-                    result[prop] = {};
-                } else {
-                    result[prop] = [];
-                }
-                deepClone1(obj[prop], result[prop]);
-            } else {
-                // 原始值或者function
-                result[prop] = obj[prop];
-            }
-        }
-    }
-    return result;
-}
-function deepClone2(target) {
-    if (typeof target !== 'object') {
-        return target;
-    }
-    let result;
-    if (Object.prototype.toString.call(target) == '[object Array]') {
-        // 数组
-        result = [];
-    } else {
-        result = {};
-    }
-    for (let prop in target) {
-        if (target.hasOwnProperty(prop)) {
-            result[prop] = deepClone2(target[prop]);
-        }
-    }
-    return result;
-}
+// function deepClone1(obj, result) {
+//     let result = result || {};
+//     for (let prop in obj) {
+//         if (obj.hasOwnProperty(prop)) {
+//             if (typeof obj[prop] == 'object' && obj[prop] !== null) {
+//                 // 是引用类型且不为null
+//                 if (Object.prototype.toString.call(obj[prop]) == '[object Object]') {
+//                     // 对象
+//                     result[prop] = {};
+//                 } else {
+//                     result[prop] = [];
+//                 }
+//                 deepClone1(obj[prop], result[prop]);
+//             } else {
+//                 // 原始值或者function
+//                 result[prop] = obj[prop];
+//             }
+//         }
+//     }
+//     return result;
+// }
+// function deepClone2(target) {
+//     if (typeof target !== 'object') {
+//         return target;
+//     }
+//     let result;
+//     if (Object.prototype.toString.call(target) == '[object Array]') {
+//         // 数组
+//         result = [];
+//     } else {
+//         result = {};
+//     }
+//     for (let prop in target) {
+//         if (target.hasOwnProperty(prop)) {
+//             result[prop] = deepClone2(target[prop]);
+//         }
+//     }
+//     return result;
+// }
 // 无法复制函数
 // let newobj = JSON.parse(JSON.stringify(obj));
+
+// 5.reverse底层原理和扩展
+Array.prototype.myReverse = function() {
+    let len = this.length;
+    for (let i = 0; i < Math.floor(len / 2); i++) { // 6 => 3 5 => 2.5
+        let temp = this[i];
+        this[i] = this[len - 1];
+        this[len - 1] = temp;
+    }
+    return this;
+}
