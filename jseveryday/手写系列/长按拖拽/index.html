@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .mark {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      height: 66px;
+      margin: 0 auto;
+      background-color: skyblue;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="mark">点击</div>
+  <div class="mark" id="mark">点击</div>
+  <div class="mark">点击</div>
+  <script>
+    let dom = document.getElementById('mark');
+    // console.log(dom);
+    // dom.addEventListener('click', () => {
+    //   console.log('click', 123);
+    // });
+    let startX = 0;
+    let startY = 0;
+    let flag = false;
+    let timmer = null;
+    dom.addEventListener('touchstart', (e) => {
+      // console.log(e.touches[0].pageX, e.touches[0].pageY);
+      console.log('touchstart', '抓住');
+      timmer = setTimeout(() => {
+        console.log('定时器');
+        flag = true;
+      }, 500);
+    });
+    dom.addEventListener('touchmove', () => {
+      if (flag) {
+        console.log('touchmove', '长按后拖拽');
+      } else {
+        timmer && clearTimeout(timmer);
+      }
+    });
+    dom.addEventListener('touchend', () => {
+      timmer && clearTimeout(timmer);
+      console.log('touchend', '松手');
+    });
+  </script>
+</body>
+</html>
