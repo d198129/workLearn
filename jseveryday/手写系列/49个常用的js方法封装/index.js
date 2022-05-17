@@ -95,12 +95,71 @@
 // let newobj = JSON.parse(JSON.stringify(obj));
 
 // 5.reverse底层原理和扩展
-Array.prototype.myReverse = function() {
-    let len = this.length;
-    for (let i = 0; i < Math.floor(len / 2); i++) { // 6 => 3 5 => 2.5
-        let temp = this[i];
-        this[i] = this[len - 1];
-        this[len - 1] = temp;
-    }
-    return this;
-}
+// Array.prototype.myReverse = function() {
+//     let len = this.length;
+//     for (let i = 0; i < Math.floor(len / 2); i++) { // 6 => 3 5 => 2.5
+//         let temp = this[i];
+//         this[i] = this[len - 1];
+//         this[len - 1] = temp;
+//     }
+//     return this;
+// }
+
+// 6. 圣杯模式的继承
+// function inherit(Target, Origin) {
+//     function F() {};
+//     F.prototype = Origin.prototype;
+//     Target.prototype = new F();
+//     Target.prototype.consructor() = Target;
+//     // 最终的原型指向
+//     Target.prop.uber = Origin.prototype;
+// }
+
+// 7. 找出字符串中第一次只出现一次的字母
+// String.prototype.firstAppear = function() {
+//     let obj = {};
+//     const len = this.length;
+//     for (let i = 0; i < len; i++) {
+//         if (obj[this[i]]) {
+//             obj[this[i]]++;
+//         } else {
+//             obj[this[i]] = 1;
+//         }
+//     }
+//     for (let prop in obj) {
+//         if (obj[prop] == 1) {
+//             return prop;
+//         }
+//     }
+//     return false
+// }
+
+// 8. 找元素的第n级父元素
+// function parent(ele, n) {
+//     while (ele && n) {
+//         ele = ele.parentElement ? ele.parentElement : ele.parentNode;
+//     }
+//     return ele;
+// }
+
+// 9. 返回元素的第n个兄弟节点
+// function retSibling(e, n) {
+//     while (e && n) {
+//         if (n > 0) {
+//             if (e.nextElementSibling) {
+//                 e = nextElementSibling;
+//             } else {
+//                 for (e = e.nextSibling; e && e.nodeType !== 1; e.nextSibling);
+//             }
+//             n--;
+//         } else {
+//             if (e.previousElementSibling) {
+//                 e = e.previousElementSibling
+//             } else {
+//                 for (e = e.nextSibling; e && e.nodeType !== 1; e.nextSibling);
+//             }
+//             n++
+//         }
+//     }
+//     return e;
+// }
