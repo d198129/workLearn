@@ -54,7 +54,7 @@
 //             speed = (json[prop] - current) / 7;
 //             speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
 //             if (prop == 'opacity') {
-//                 ele.style[prop] = (current + current) / 100;
+//                 ele.style[prop] = (current + speed) / 100;
 //             } else {
 //                 ele.style[prop] = current + speed + 'px';
 //             }
