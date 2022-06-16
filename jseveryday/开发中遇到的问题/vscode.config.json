@@ -1,0 +1,16 @@
+"newpromise": {
+		"prefix": "np",
+		"body": [
+		  "Promise((resolve, reject) => {$0});"
+		],
+		"description": "newpromise"
+},
+"afterPromise": {
+		"prefix": "get",
+		"body": [
+    ".then(res => {$1})",
+    ".catch(err => {$2})",
+    ".finally($3);"
+  ],
+  "description": "afterPromise"
+}
