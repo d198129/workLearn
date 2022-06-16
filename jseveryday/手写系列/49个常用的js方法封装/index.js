@@ -93,6 +93,48 @@
 // }
 // 无法复制函数
 // let newobj = JSON.parse(JSON.stringify(obj));
+// 4.1 如果某个属性是function， 属性容易丢失 
+// let obj = {
+//     fun: function name(params) {
+//     }
+// }
+// console.log(obj);// { fun: [Function: name] }
+// let temp = JSON.parse(JSON.stringify(obj))
+// console.log(temp);// {}
+
+// 4.2 如果被拷贝的对象中某个属性的值为undefined，则拷贝之后该属性会丢失
+// let obj = {
+//     // fun: function name(params) {
+//     // }
+//     name:undefined
+// }
+
+// console.log(obj);// { name: undefined }
+// let temp = JSON.parse(JSON.stringify(obj))
+// console.log(temp);// {}
+
+
+// 4.3 如果被拷贝的对象中有正则表达式，则拷贝之后的对象正则表达式会变成Object
+// let obj = {
+//     // fun: function name(params) {
+//     // }
+//     name:/abc/
+// }
+// console.log(obj);// { name: /abc/ }
+// let temp = JSON.parse(JSON.stringify(obj))
+// console.log(temp);// {}
+
+// let obj = [{ name: undefined }]
+// console.log(obj);// [ { name: undefined } ]
+// let temp = JSON.parse(JSON.stringify(obj))
+// console.log(temp);// [ {} ]
+
+// 其他补充
+// 性能差根据网上的数据大概比遍历慢几倍 数据
+// 无法实现对函数 、RegExp等特殊对象的克隆
+// 会抛弃对象的constructor,所有的构造函数会指向Object
+// 对象有循环引用,会报错
+// 含有symbol属性名的对象拷贝会漏掉symbol属性
 
 // 5.reverse底层原理和扩展
 // Array.prototype.myReverse = function() {
