@@ -15,6 +15,25 @@ window.addEventListener('unhandledrejection', event => {
     console.log('JS报错', error);
     send();
 })
+// # 控制台错误抓取
+
+// ## js脚本异常主要分位两种情况
+// 1. JS脚本里存在语法错误;
+// 2. JS脚本在运行时发生错误;
+
+// ## 有哪些抓取错误的方式
+// 1. try {} catch {}
+// 2. window.onerror();
+
+// ## 他们有什么区别和优缺点
+// 1. try catch
+// - 优点: 不会阻塞其他代码运行。
+// - 缺点: 
+//     1. 没法捕捉try catch 快的语法错误，出错后js解释器不会执行当前的代码块，所以就没办法catch
+//     2. 没法直接捕捉异步的错误事件，try catch只能捕获到同步代码的错误。只能捕捉当前执行流的运行错误，异步回调对于try catch来说是不属于当前执行流，所以try catch 不能一步到位捕捉异步，只能缩小范围去try catch 解决
+// 2. window.onerror
+// - 优点: onerror能捕捉到所有控制台的错误，但不能跟语法出错的代码快在同一个块，要让window.onerror比其他脚本先执行。
+// - 缺点: 捕捉到错误后并不能像try catch一样能够让代码正常运行下去，代码在出错部分抛出错误就会停止运行了。所以基本还是会用try catch 去catch错误，window.onerror可以用来做错误统计上报
 
 // 2. css中的z-index层叠覆盖问题
 // 多种弹窗，toast，浮层组件，多人协同业务开发会将index不断覆盖式的放大
